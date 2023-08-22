@@ -1,49 +1,42 @@
-/*
-Assessment Requirements
-1. Create a variable that can hold a number of NFT's. What type of variable might this be?
-2. Create an object inside your mintNFT function that will hold the metadata for your NFTs. 
-   The metadata values will be passed to the function as parameters. When the NFT is ready, 
-   you will store it in the variable you created in step 1
-3. Your listNFTs() function will print all of your NFTs metadata to the console (i.e. console.log("Name: " + someNFT.name))
-4. For good measure, getTotalSupply() should return the number of NFT's you have created
-*/
-
-// create a variable to hold your NFT's
-const NFTs=[]
-// this function will take in some values as parameters, create an
-// NFT object using the parameters passed to it for its metadata, 
-// and store it in the variable above.
-function mintNFT (d1,d2,d3) {
-    const nft={
-        name: d1, 
-        style: d2, 
-        colour: d3
-    }
-    NFTs.push(nft);
-    console.log(nft.name+" is minted");
+function New_NFT (brand, standard, name, rating) {
+    this.brand = brand;
+    this.standard = standard;
+    this.name = name;
+    this.rating = rating;
 }
 
-// create a "loop" that will go through an "array" of NFT's
-// and print their metadata with console.log()
+var nft_storage = []; // This array will store the objects
+
+// This function will create a new object and make it a part of the nft_storage
+function mintNFT (brand, standard, name, rating) {
+    var nft = new New_NFT(brand, standard, name, rating);
+    nft_storage.push(nft);
+}
+
+// This function will get the details of our stored nfts.
 function listNFTs () {
-    console.log("\nList of all NFTs : ");
-    for(let i=0;i<NFTs.length;i++)
-    {
-        console.log("\nName of the NFT is : "+NFTs[i].name);
-        console.log("Style of the NFT is : "+NFTs[i].style);
-        console.log("Colour of the NFT is : "+NFTs[i].colour);
+    console.log("\nNFT details are listed below:\n");
+
+    for (var i=0; i < nft_storage.length; i++){
+        console.log("NFT " + (i+1) + "\n");
+        console.log("Details:");
+        console.log("Brand: " + (nft_storage[i].brand));
+        console.log("Standard: " + (nft_storage[i].standard));
+        console.log("Name: " + (nft_storage[i].name));
+        console.log("Rating: " + (nft_storage[i].rating));
+        console.log("\n");
     }
 }
 
-// print the total number of NFTs we have minted to the console
 function getTotalSupply() {
-    const number=NFTs.length;
-    console.log('\nTotal Number of NFTs created : '+number);
+    var total_supply = nft_storage.length;
+    console.log("Total minted nfts are: " + (total_supply));
 }
 
-mintNFT("mukess","bent","pink");
-mintNFT("rajess","outside","black");
-mintNFT("mahess","dalla","brown");
-mintNFT("rex","straight","orange");
+var b = prompt("Enter Brand Name : ");
+var s = prompt("Enter Standard : ");
+var n = prompt("Enter Car Name : ");
+var r = prompt("Enter Rating : ");
+mintNFT(b,s,n,r);
 listNFTs();
 getTotalSupply();
